@@ -14,7 +14,7 @@ export default function GuestForm() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ firstName: 'Karl', lastName: 'Horky' }),
+      body: JSON.stringify({ firstName: firstName, lastName: lastName }),
     });
     const createdGuest = await response.json();
     const newGuest = { firstName, lastName };
