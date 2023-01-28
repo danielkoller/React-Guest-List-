@@ -7,6 +7,7 @@ export default function App() {
   const baseUrl = 'http://localhost:4000';
   const [refetch, setRefetch] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   // Enter a new guest
 
@@ -31,15 +32,16 @@ export default function App() {
 
   // Update a guest
 
-  async function updateGuest(checkval, guestId) {
-    console.log(checkval, guestId);
+  async function updateGuest(val, guestId) {
+    console.log(val, guestId);
     await fetch(`${'http://localhost:4000'}/guests/${guestId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ attending: checkval }),
+      body: JSON.stringify({ attending: val }),
     });
     setRefetch(!refetch);
   }
+
   // Delete a guest
 
   async function deleteGuest() {
@@ -60,12 +62,13 @@ export default function App() {
       setGuestAPI(allGuests);
       console.log(allGuests);
       setIsLoading(false);
+      setIsDisabled(false);
     }
 
     fetchUsers().catch((error) => console.log(error));
   }, [refetch]);
 
-  // Conditional Rendering
+  // Loading Message
 
   if (isLoading) {
     return 'Loading...';
@@ -79,6 +82,7 @@ export default function App() {
           First Name:
           <input
             value={firstName}
+            disabled={isDisabled}
             placeholder="First Name"
             onChange={(event) => setFirstName(event.target.value)}
           />
@@ -87,6 +91,7 @@ export default function App() {
           Last Name:
           <input
             value={lastName}
+            disabled={isDisabled}
             placeholder="Last Name"
             onChange={(event) => setLastName(event.target.value)}
           />
