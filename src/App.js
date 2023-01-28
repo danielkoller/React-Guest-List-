@@ -107,21 +107,21 @@ export default function App() {
             <div key={guest.id}>
               <div data-test-id="guest">
                 {guest.firstName} {guest.lastName}
+                <input
+                  type="checkbox"
+                  aria-label={`${guest.firstName} ${guest.lastName} attending:${guest.attending}`}
+                  checked={guest.attending}
+                  onChange={(event) =>
+                    updateGuest(event.currentTarget.checked, guest.id)
+                  }
+                />
+                <button
+                  aria-label={`Remove ${guest.firstName} ${guest.lastName}`}
+                  onClick={() => deleteGuest(guest.id)}
+                >
+                  Remove
+                </button>
               </div>
-              <input
-                type="checkbox"
-                aria-label={`${guest.firstName} ${guest.lastName} attending:${guest.attending}`}
-                checked={guest.attending}
-                onChange={(event) =>
-                  updateGuest(event.currentTarget.checked, guest.id)
-                }
-              />
-              <button
-                aria-label={`Remove ${guest.firstName} ${guest.lastName}`}
-                onClick={() => deleteGuest(guest.id)}
-              >
-                Remove
-              </button>
             </div>
           );
         })}
