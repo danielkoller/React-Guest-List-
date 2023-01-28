@@ -118,7 +118,7 @@ export default function App() {
               />
               <button
                 aria-label={`Remove ${guest.firstName} ${guest.lastName}`}
-                onClick={deleteGuest}
+                onClick={() => deleteGuest(guest.id)}
               >
                 Remove
               </button>
