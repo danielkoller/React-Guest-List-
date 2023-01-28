@@ -5,6 +5,7 @@ export default function App() {
   const [lastName, setLastName] = useState('');
   const [guestAPI, setGuestAPI] = useState([]);
   const baseUrl = 'http://localhost:4000';
+  const [refresh, setRefresh] = useState(false);
 
   // Enter the Guests
 
@@ -19,12 +20,25 @@ export default function App() {
     });
     const createdGuest = await response.json();
     const newGuest = { firstName, lastName };
+    setRefresh(!refresh);
     setFirstName('');
     setLastName('');
+
     console.log(createdGuest);
     console.log(newGuest);
   }
 
+  // Update a guest
+
+  async function guestUpdate(checkval, guestId) {
+    console.log(checkval, guestId);
+    await fetch(`${'http://localhost:4000'}/guests/${guestId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ attending: checkval }),
+    });
+    setRefresh(!refresh);
+  }
   // Delete a guest
 
   async function deleteGuest() {
@@ -47,7 +61,7 @@ export default function App() {
     }
 
     fetchUsers().catch((error) => console.log(error));
-  }, [firstName]);
+  }, [refresh]);
 
   return (
     <div>
@@ -80,7 +94,14 @@ export default function App() {
               <div data-test-id="guest">
                 {guest.firstName} {guest.lastName}
               </div>
-              <input type="checkbox" aria-label="" />
+              <input
+                type="checkbox"
+                aria-label={`${guest.firstName} ${guest.lastName} attending:${guest.attending}`}
+                checked={guest.attending}
+                onChange={(event) =>
+                  guestUpdate(event.currentTarget.checked, guest.id)
+                }
+              />
               <button onClick={deleteGuest}>Remove</button>
             </div>
           );
