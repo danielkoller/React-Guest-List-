@@ -80,7 +80,7 @@ export default function App() {
       <h1>Guest List</h1>
       <form onSubmit={handleSubmit}>
         <label id="firstName" htmlFor="firstName">
-          First Name:
+          First name
           <input
             value={firstName}
             disabled={isDisabled}
@@ -89,7 +89,7 @@ export default function App() {
           />
         </label>
         <label id="lastName" htmlFor="lastName">
-          Last Name:
+          Last name
           <input
             value={lastName}
             disabled={isDisabled}
