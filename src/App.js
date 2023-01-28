@@ -79,24 +79,22 @@ export default function App() {
     <div>
       <h1>Guest List</h1>
       <form onSubmit={handleSubmit}>
-        <label id="firstName" htmlFor="firstName">
-          First name
-          <input
-            value={firstName}
-            disabled={isDisabled}
-            placeholder="First Name"
-            onChange={(event) => setFirstName(event.target.value)}
-          />
-        </label>
-        <label id="lastName" htmlFor="lastName">
-          Last name
-          <input
-            value={lastName}
-            disabled={isDisabled}
-            placeholder="Last Name"
-            onChange={(event) => setLastName(event.target.value)}
-          />
-        </label>
+        <label htmlFor="firstName">First Name: </label>
+        <input
+          id="firstName"
+          value={firstName}
+          disabled={isDisabled}
+          placeholder="First Name"
+          onChange={(event) => setFirstName(event.target.value)}
+        />
+        <label htmlFor="lastName">Last Name: </label>
+        <input
+          id="lastName"
+          value={lastName}
+          disabled={isDisabled}
+          placeholder="Last Name"
+          onChange={(event) => setLastName(event.target.value)}
+        />
         <p>Press Enter to submit!</p>
         <button>Submit</button>
       </form>
