@@ -5,9 +5,10 @@ export default function App() {
   const [lastName, setLastName] = useState('');
   const [guestAPI, setGuestAPI] = useState([]);
   const baseUrl = 'http://localhost:4000';
-  const [refresh, setRefresh] = useState(false);
+  const [refetch, setRefetch] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Enter the Guests
+  // Enter a new guest
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -20,7 +21,7 @@ export default function App() {
     });
     const createdGuest = await response.json();
     const newGuest = { firstName, lastName };
-    setRefresh(!refresh);
+    setRefetch(!refetch);
     setFirstName('');
     setLastName('');
 
@@ -30,14 +31,14 @@ export default function App() {
 
   // Update a guest
 
-  async function guestUpdate(checkval, guestId) {
+  async function updateGuest(checkval, guestId) {
     console.log(checkval, guestId);
     await fetch(`${'http://localhost:4000'}/guests/${guestId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ attending: checkval }),
     });
-    setRefresh(!refresh);
+    setRefetch(!refetch);
   }
   // Delete a guest
 
@@ -58,10 +59,17 @@ export default function App() {
       const allGuests = await response.json();
       setGuestAPI(allGuests);
       console.log(allGuests);
+      setIsLoading(false);
     }
 
     fetchUsers().catch((error) => console.log(error));
-  }, [refresh]);
+  }, [refetch]);
+
+  // Conditional Rendering
+
+  if (isLoading) {
+    return 'Loading...';
+  }
 
   return (
     <div>
@@ -99,10 +107,15 @@ export default function App() {
                 aria-label={`${guest.firstName} ${guest.lastName} attending:${guest.attending}`}
                 checked={guest.attending}
                 onChange={(event) =>
-                  guestUpdate(event.currentTarget.checked, guest.id)
+                  updateGuest(event.currentTarget.checked, guest.id)
                 }
               />
-              <button onClick={deleteGuest}>Remove</button>
+              <button
+                aria-label={`Remove ${guest.firstName} ${guest.lastName}`}
+                onClick={deleteGuest}
+              >
+                Remove
+              </button>
             </div>
           );
         })}
