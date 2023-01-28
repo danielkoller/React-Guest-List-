@@ -79,17 +79,19 @@ export default function App() {
     <div>
       <h1>Guest List</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="firstName">First Name: </label>
+        <label htmlFor="firstName">First name</label>
         <input
           id="firstName"
+          name="firstName"
           value={firstName}
           disabled={isDisabled}
           placeholder="First Name"
           onChange={(event) => setFirstName(event.target.value)}
         />
-        <label htmlFor="lastName">Last Name: </label>
+        <label htmlFor="lastName">Last name</label>
         <input
           id="lastName"
+          name="lastName"
           value={lastName}
           disabled={isDisabled}
           placeholder="Last Name"
