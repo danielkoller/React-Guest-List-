@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function GuestForm() {
   const [firstName, setFirstName] = useState('');
