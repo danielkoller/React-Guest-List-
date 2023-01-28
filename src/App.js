@@ -4,7 +4,8 @@ export default function App() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [guestAPI, setGuestAPI] = useState([]);
-  const baseUrl = 'http://localhost:4000';
+  const baseUrl =
+    'https://express-guest-list-api-memory-data-store.danielkoller3.repl.co';
   const [refetch, setRefetch] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -34,7 +35,7 @@ export default function App() {
 
   async function updateGuest(val, guestId) {
     console.log(val, guestId);
-    await fetch(`${'http://localhost:4000'}/guests/${guestId}`, {
+    await fetch(`${baseUrl}/guests/${guestId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ attending: val }),
