@@ -22,13 +22,11 @@ export default function App() {
       body: JSON.stringify({ firstName: firstName, lastName: lastName }),
     });
     const createdGuest = await response.json();
-    const newGuest = { firstName, lastName };
     setRefetch(!refetch);
     setFirstName('');
     setLastName('');
 
     console.log(createdGuest);
-    console.log(newGuest);
   }
 
   // Update a guest
