@@ -107,7 +107,7 @@ export default function App() {
                 {guest.firstName} {guest.lastName}
                 <input
                   type="checkbox"
-                  aria-label={`${guest.firstName} ${guest.lastName} attending:${guest.attending}`}
+                  aria-label="attending"
                   checked={guest.attending}
                   onChange={(event) =>
                     updateGuest(event.currentTarget.checked, guest.id)
