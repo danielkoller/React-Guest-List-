@@ -52,6 +52,19 @@ export default function App() {
     setGuestAPI(allGuests);
   }
 
+  // Delete all guests
+
+  async function deleteAllGuests() {
+    for (const guest of guestAPI) {
+      await fetch(`${baseUrl}/guests/${guest.id}`, {
+        method: 'DELETE',
+      });
+    }
+    const response = await fetch(`${baseUrl}/guests`);
+    const allGuests = await response.json();
+    setGuestAPI(allGuests);
+  }
+
   // Show the Guests
 
   useEffect(() => {
@@ -97,6 +110,7 @@ export default function App() {
         />
         <p>Press Enter to submit!</p>
         <button>Submit</button>
+        <button onClick={deleteAllGuests}>Delete all guests</button>
       </form>
       <div>
         <h2>Names</h2>
