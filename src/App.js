@@ -161,8 +161,8 @@ export default function App() {
 
   // Delete a guest
 
-  async function deleteGuest() {
-    await fetch(`${baseUrl}/guests/${guestAPI[0]['id']}`, {
+  async function deleteGuest(id) {
+    await fetch(`${baseUrl}/guests/${id}`, {
       method: 'DELETE',
     });
     const response = await fetch(`${baseUrl}/guests`);
